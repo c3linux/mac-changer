@@ -1,7 +1,7 @@
 import subprocess
 import optparse
 import re
-
+import os
 
 def get_input():
     parser_object = optparse.OptionParser()
@@ -23,10 +23,13 @@ def check_new_mac(interface):
         return new_mac_address.group(0)
 
 
-(options, arguments) = get_input()
-change_mac_address(options.interface, options.mac_address)
-new_mac = check_new_mac(options.interface)
-if new_mac == options.mac_address:
-    print("Successfully Mac Address Changed!")
+if os.getuid() != 0:
+    print("You must be root")
 else:
-    print("Something went wrong")
+    (options, arguments) = get_input()
+    change_mac_address(options.interface, options.mac_address)
+    new_mac = check_new_mac(options.interface)
+    if new_mac == options.mac_address:
+        print("Successfully Mac Address Changed!")
+    else:
+        print("Something went wrong")
