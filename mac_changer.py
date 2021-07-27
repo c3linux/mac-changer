@@ -2,6 +2,7 @@ import subprocess
 import optparse
 import re
 import os
+from messages import banner
 
 
 def get_input():
@@ -29,6 +30,7 @@ def check_new_mac(interface):
 if os.getuid() != 0:
     print("You must be root")
 else:
+    banner()
     (options, arguments) = get_input()
     change_mac_address(options.interface, options.mac_address)
     new_mac = check_new_mac(options.interface)
