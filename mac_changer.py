@@ -3,10 +3,13 @@ import optparse
 import re
 import os
 
+
 def get_input():
-    parser_object = optparse.OptionParser()
-    parser_object.add_option("-i", "--interface", dest="interface", help="interface")
+    usage = "python3 mac_changer.py -i eth0 (or your interface) -m 11:22:33:44:55:66 (or your choice)"
+    parser_object = optparse.OptionParser(usage=usage)
+    parser_object.add_option("-i", "--interface", dest="interface (wlan0, eth0, ...)", help="interface")
     parser_object.add_option("-m", "--mac", dest="mac_address", help="new mac address")
+    # parser_object.add_option("-r", "--random", dest="random", help="random mac address")
     return parser_object.parse_args()
 
 
